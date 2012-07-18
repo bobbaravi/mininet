@@ -134,8 +134,10 @@ function of {
     cd ~/
     sudo apt-get install -y git-core automake m4 pkg-config libtool \
 		make libc6-dev autoconf autotools-dev gcc
-    git clone git://openflowswitch.org/openflow.git
-    cd ~/openflow
+    #git clone https://github.com/horms/openvswitch.git
+    wget http://openflow.org/downloads/openflow-1.0.0.tar.gz
+    tar xzf openflow-1.0.0.tar.gz
+    cd ~/openflow-1.0.0
 
     # Patch controller to handle more than 16 switches
     patch -p1 < ~/mininet/util/openflow-patches/controller.patch
@@ -170,7 +172,7 @@ function wireshark {
         sudo apt-get install -y scons mercurial libglib2.0-dev
         sudo apt-get install -y libwiretap-dev libwireshark-dev
         cd ~
-        hg clone https://bitbucket.org/barnstorm/of-dissector
+        git clone https://github.com/CPqD/ofdissector.git
         cd of-dissector/src
         export WIRESHARK=/usr/include/wireshark
         scons
@@ -183,7 +185,8 @@ function wireshark {
         # Install older version from reference source
         cd ~/openflow/utilities/wireshark_dissectors/openflow
         make
-        sudo make install
+        sudo 
+make install
     fi
 
     # Copy coloring rules: OF is white-on-blue:
@@ -213,7 +216,7 @@ function ovs {
 
     # Install OVS from release
     cd ~/
-    git clone git://openvswitch.org/openvswitch
+    git clone https://github.com/horms/openvswitch.git
     cd $OVS_SRC
     git checkout $OVS_RELEASE
     ./boot.sh
@@ -251,9 +254,9 @@ function nox {
 
     # Fetch NOX destiny
     cd ~/
-    git clone git://noxrepo.org/nox noxcore
-    cd noxcore
-    git checkout -b destiny remotes/origin/destiny
+    git clone https://github.com/noxrepo/nox.git
+    cd nox
+    # git checkout -b destiny remotes/origin/destiny
 
     # Apply patches
     git checkout -b tutorial-destiny
@@ -284,7 +287,7 @@ function oftest {
 
     # Install oftest:
     cd ~/
-    git clone git://github.com/floodlight/oftest
+    git clone git://openflow.org/oftest
     cd oftest
     cd tools/munger
     sudo make install
