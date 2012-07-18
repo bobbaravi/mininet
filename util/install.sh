@@ -173,7 +173,7 @@ function wireshark {
         sudo apt-get install -y libwiretap-dev libwireshark-dev
         cd ~
         git clone https://github.com/CPqD/ofdissector.git
-        cd of-dissector/src
+        cd ofdissector/src
         export WIRESHARK=/usr/include/wireshark
         scons
         # libwireshark0/ on 11.04; libwireshark1/ on later
